@@ -3,8 +3,9 @@
 Using `Namespaces` in Linux. <br/>
 This works as a preloaded shared lib <br/>
 
-- It first takes your application, preloads the shared lib to set up the sandbox
-- Then it runs your applications' `main(int,char\*\*)`
+- It first takes your application's `_libc_start_main`, preloads the shared lib to set up the sandbox
+- Does this by overriding the `__libc_start_main` and `main(int,char**)` setting up the sandbox before calling the next `main(int,char**)` which belongs to the lib
+- Then it runs your applications' `main(int,char**)`
 
 # RUN
 
@@ -15,7 +16,7 @@ This works as a preloaded shared lib <br/>
     make
 ```
 
-- Manual : replace `<executable>` executable with your executable
+- Manual : in the makefilem replace `<executable>` executable with your executable
 
 ```bash
 make lib
